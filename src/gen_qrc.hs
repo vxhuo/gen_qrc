@@ -73,20 +73,17 @@ help_text = "\n\nusage: qrc_gen <path_to_gui_dir> <output_path> <prefix>\n\n"
 
 finish_text :: [FilePath] -> String -> FilePath -> FilePath -> FilePath -> String
 finish_text files generated_file abs_out_path target_path out_path =
-    "\n" 
+    "\n generating qrc file..." 
  ++ "\n checked for files [svg]; [qml]; [qmldir]; target relative path [" ++ target_path ++ "]; output relative path [" ++ out_path ++ "]"
  ++ "\n"
- ++ "\n"
  ++ "\n found:"
- ++ "\n"
  ++ "\n" ++ unlines
             [
-                unlines (map (\f -> " " ++ f) (filter (\f -> resource_order f == 1) files)),
-                unlines (map (\f -> " " ++ f) (filter (\f -> resource_order f == 2) files)),
-                unlines (map (\f -> " " ++ f) (filter (\f -> resource_order f == 3) files))
+                unlines (map (\f -> "  " ++ f) (filter (\f -> resource_order f == 1) files)),
+                unlines (map (\f -> "  " ++ f) (filter (\f -> resource_order f == 2) files)),
+                unlines (map (\f -> "  " ++ f) (filter (\f -> resource_order f == 3) files))
             ]
- ++ "\n"
- ++ "\n all    [" ++ show (length files) ++ "]"
+ ++ " all    [" ++ show (length files) ++ "]"
  ++ "\n icon   [" ++ show (count_icon files) ++ "]"
  ++ "\n qml    [" ++ show (count_qml files) ++ "]"
  ++ "\n qmldir [" ++ show (count_qmldir files) ++ "]"
